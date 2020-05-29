@@ -218,8 +218,10 @@ bot.onText(/(.+)$/, function (msg, match) {
                         formattedAnswer += "\n";
                         
                     itemsFound++;
-                    	formattedAnswer += item.content.$t; // add item content, '\u27a1' is the arrow emoji
-			formattedAnswerF = formattedAnswer.substring(6, 100);
+                    	formattedAnswerF = item.content.$t;
+			
+			formattedAnswer += formattedAnswerF.substring(6, 100); // add item content, '\u27a1' is the arrow emoji
+			
                 }
                 else if (currentHours == itemTime) // else collect items for the current hour
                 {
