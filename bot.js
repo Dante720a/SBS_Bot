@@ -94,7 +94,7 @@ bot.onText(/(.+)$/, function (msg, match) {
                 {
                     // add the line break if not the first answer
                     if (itemsFound==0) 
-                        formattedAnswer += "گزارش قطعه " + targetTime + " - ";
+                        formattedAnswer += "";
                     else 
                         formattedAnswer += "\n";
                         
@@ -123,10 +123,10 @@ bot.onText(/(.+)$/, function (msg, match) {
         if (itemsFound == 0)
         {
             if (targetTime<0 || targetTime>24)
-               // formattedAnswer = "اطلاعاتی برای کد قطعه وارد شده پیدا نشد" + ".\n"+ "لطفاً کد قطعه رابصورت صحیح وارد نمایید" + ".\n";
+               // formattedAnswer = "اطلاعاتی پیدا نشد" + ".\n"+ "لطفاً کد رابصورت صحیح وارد نمایید" + ".\n";
 		    formattedAnswer = "";
             else 
-                // formattedAnswer = "قبضی برای قطعه وارد شده پیدا نشد ( " + targetTime+ " ч)";
+                // formattedAnswer = " اطلاعاتی پیدا نشد( " + targetTime+ " ч)";
 		    formattedAnswer = "";
                 
             // output current answer
@@ -213,12 +213,12 @@ bot.onText(/(.+)$/, function (msg, match) {
                 {
                     // add the line break if not the first answer
                     if (itemsFound==0) 
-                        formattedAnswer += "قبوض آب:" + "\n";
+                        formattedAnswer += "" + "\n";
                     else 
                         formattedAnswer += "\n";
                         
                     itemsFound++;
-                    formattedAnswer += item.content.$t; // add item content, '\u27a1' is the arrow emoji
+                    formattedAnswer += '\u27a1' + item.content.$t; // add item content, '\u27a1' is the arrow emoji
                 }
                 else if (currentHours == itemTime) // else collect items for the current hour
                 {
@@ -227,7 +227,7 @@ bot.onText(/(.+)$/, function (msg, match) {
                     else 
                         currentAnswer += "\n"; 
                         
-                    currentAnswer +='\u27a1'+ item.content.$t; // get item content, '\u27a1' is the arrow emoji
+                    currentAnswer += item.content.$t; // get item content, '\u27a1' is the arrow emoji
                 }
                 
                 // else doing nothing
@@ -242,10 +242,10 @@ bot.onText(/(.+)$/, function (msg, match) {
         if (itemsFound == 0)
         {
             if (targetTime<0 || targetTime>24)
-                //formattedAnswer = "اطلاعاتی برای کد قطعه وارد شده پیدا نشد" + ".\n"+ "لطفاً کد قطعه رابصورت صحیح وارد نمایید" + ".\n";
+                //formattedAnswer = "اطلاعاتی برای کد وارد شده پیدا نشد" + ".\n"+ "لطفاً کد رابصورت صحیح وارد نمایید" + ".\n";
            formattedAnswer = "";
 		    else 
-                //formattedAnswer = "قبضی برای قطعه وارد شده پیدا نشد ( " + targetTime+ " ч)";
+                //formattedAnswer = "پیدا نشد ( " + targetTime+ " ч)";
                 formattedAnswer = "";
             // output current answer
             if (currentAnswer != '')
@@ -374,6 +374,7 @@ bot.onText(/(.+)$/, function (msg, match) {
  
 
         // send message telegram finally
+	formattedAnswer += "\n" + ".";
         var MMSG3 = formattedAnswer; 
 	setTimeout(() => { 
 		bot.sendMessage(msg.chat.id, MMSG3).then(function () {
