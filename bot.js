@@ -109,6 +109,7 @@ bot.onText(/(.+)$/, function (msg, match) {
                         currentAnswer += "\n"; 
                         
                     currentAnswer += item.content.$t; // get item content, '\u27a1' is the arrow emoji
+			
                 }
                 
                 // else doing nothing
@@ -220,8 +221,12 @@ bot.onText(/(.+)$/, function (msg, match) {
                         //formattedAnswer = formattedAnswer.substring(6, 256) +  "\n";
 			
 			
-                    itemsFound++;
-                    formattedAnswer += item.content.$t; // add item content, '\u27a1' is the arrow emoji
+                    	itemsFound++;
+                    	formattedAnswer += item.content.$t; // add item content, '\u27a1' is the arrow emoji
+			
+			formattedAnswer = formattedAnswer.substring(6, 256) +  "\n";
+			
+			
                 }
                 else if (currentHours == itemTime) // else collect items for the current hour
                 {
