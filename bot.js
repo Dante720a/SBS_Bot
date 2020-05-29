@@ -212,14 +212,15 @@ bot.onText(/(.+)$/, function (msg, match) {
                 {
                     // add the line break if not the first answer
                     if (itemsFound==0) 
-                        formattedAnswer += "\n";
+                        //formattedAnswer += "\n";
+			formattedAnswer += "\n";
                     else 
                         
 			//formattedAnswer = formattedAnswer.substring(6, 100);   
-			formattedAnswer += "B"+ "\n";
+			formattedAnswer += "\n";
                         			
                         itemsFound++;
-                    	formattedAnswer += item.content.$t; // add item content, '\u27a1' is the arrow emoji
+                    	formattedAnswer += 'B'+ item.content.$t; // add item content, '\u27a1' is the arrow emoji
 			//FormattedAnswerF += item.content.$t; // add item content, '\u27a1' is the arrow emoji
 			
                 }
