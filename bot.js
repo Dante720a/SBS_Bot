@@ -162,9 +162,9 @@ bot.onText(/(.+)$/, function (msg, match) {
         
 		
 		
-		if (error || response.statusCode != 200) {
-            console.log('Error: '+error); // Show the error
-            console.log('Status code: ' + response.statusCode); // Show the error
+	if (error || response.statusCode != 200) {
+        console.log('Error: '+error); // Show the error
+        console.log('Status code: ' + response.statusCode); // Show the error
             return;
         }
         
@@ -214,11 +214,11 @@ bot.onText(/(.+)$/, function (msg, match) {
                 {
                     // add the line break if not the first answer
                     if (itemsFound==0) 
-                        formattedAnswer += "" + "\n";
+                        formattedAnswer += "A" + "\n";
                     else 
                         
-			formattedAnswer = formattedAnswer.substring(6, 100);   
-			formattedAnswer += "\n";
+			//formattedAnswer = formattedAnswer.substring(6, 100);   
+			formattedAnswer += "B"+ "\n";
                         			
                         itemsFound++;
                     	formattedAnswer += item.content.$t; // add item content, '\u27a1' is the arrow emoji
@@ -230,7 +230,7 @@ bot.onText(/(.+)$/, function (msg, match) {
                     if (currentAnswer == '')
                         currentAnswer == 'Starting from ' + currentHours + " h the following talks are goinf:\n";
                     else 
-                        currentAnswer += "\n"; 
+                        currentAnswer += "C"+ "\n"; 
                         
                     currentAnswer += item.content.$t; // get item content, '\u27a1' is the arrow emoji
                 }
