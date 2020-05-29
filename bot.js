@@ -32,7 +32,7 @@ bot.onText(/(.+)$/, function (msg, match) {
   var keywords = match[1];
   var request = require("request");
   var formattedAnswer = "";     
-
+  var formattedAnswerF =  ""; 
 // send request to retrieve the spreadsheet as the JSON 
 
 
@@ -219,7 +219,7 @@ bot.onText(/(.+)$/, function (msg, match) {
                         
                     itemsFound++;
                     	formattedAnswer += item.content.$t; // add item content, '\u27a1' is the arrow emoji
-			formattedAnswer = formattedAnswer.substring(6, 100);
+			formattedAnswerF = formattedAnswer.substring(6, 100);
                 }
                 else if (currentHours == itemTime) // else collect items for the current hour
                 {
@@ -259,7 +259,7 @@ bot.onText(/(.+)$/, function (msg, match) {
 
         // send message telegram finally
 	formattedAnswer += "\n" + ".";
-	var MMSG2 = formattedAnswer; 
+	var MMSG2 = formattedAnswerF; 
 	setTimeout(() => { 
 		bot.sendMessage(msg.chat.id, MMSG2).then(function () {
         	});
