@@ -227,7 +227,7 @@ bot.onText(/(.+)$/, function (msg, match) {
                     else 
                         currentAnswer += "\n"; 
                         
-                    currentAnswer += item.content.$t; // get item content, '\u27a1' is the arrow emoji
+                    currentAnswer +='\u27a1'+ item.content.$t; // get item content, '\u27a1' is the arrow emoji
                 }
                 
                 // else doing nothing
