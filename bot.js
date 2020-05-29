@@ -216,8 +216,8 @@ bot.onText(/(.+)$/, function (msg, match) {
                         //formattedAnswer += "" + "\n";
 			formattedAnswer = formattedAnswer.substring(6, 256) +  "\n";
                     else 
-                        //formattedAnswer +=  "\n";
-                        formattedAnswer = formattedAnswer.substring(6, 256) +  "\n";
+                        formattedAnswer +=  "\n";
+                        //formattedAnswer = formattedAnswer.substring(6, 256) +  "\n";
 			
 			
                     itemsFound++;
