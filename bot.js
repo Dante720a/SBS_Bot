@@ -215,18 +215,11 @@ bot.onText(/(.+)$/, function (msg, match) {
                     // add the line break if not the first answer
                     if (itemsFound==0) 
                         formattedAnswer += "" + "\n";
-			
                     else 
-                        formattedAnswer +=  "\n";
-                        //formattedAnswer = formattedAnswer.substring(6, 256) +  "\n";
-			
-			
-                    	itemsFound++;
-                    	formattedAnswer += '\u27a1' + item.content.$t; // add item content, '\u27a1' is the arrow emoji
-			
-			
-			
-			
+                        formattedAnswer += "\n";
+                        
+                    itemsFound++;
+                    formattedAnswer += item.content.$t; // add item content, '\u27a1' is the arrow emoji
                 }
                 else if (currentHours == itemTime) // else collect items for the current hour
                 {
@@ -234,9 +227,8 @@ bot.onText(/(.+)$/, function (msg, match) {
                         currentAnswer == 'Starting from ' + currentHours + " h the following talks are goinf:\n";
                     else 
                         currentAnswer += "\n"; 
-                        currentAnswer += '\u27a1' + item.content.$t; // get item content, '\u27a1' is the arrow emoji
-			
-			
+                        
+                    currentAnswer += item.content.$t; // get item content, '\u27a1' is the arrow emoji
                 }
                 
                 // else doing nothing
@@ -268,7 +260,6 @@ bot.onText(/(.+)$/, function (msg, match) {
         // send message telegram finally
 	formattedAnswer += "\n" + ".";
 	var MMSG2 = formattedAnswer; 
-	
 	setTimeout(() => { 
 		bot.sendMessage(msg.chat.id, MMSG2).then(function () {
         	});
