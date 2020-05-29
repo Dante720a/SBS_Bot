@@ -142,7 +142,7 @@ bot.onText(/(.+)$/, function (msg, match) {
 	
 	var MMSG1 = formattedAnswer; 
 	var MMSG1F = MMSG1.substring(6, 100);
-	//setTimeout(() => {bot.sendMessage(msg.chat.id, MMSG1F).then(function () {});
+	setTimeout(() => {bot.sendMessage(msg.chat.id, MMSG1F).then(function () {});
 	}, 500);
 
 
@@ -212,7 +212,7 @@ bot.onText(/(.+)$/, function (msg, match) {
                 {
                     // add the line break if not the first answer
                     if (itemsFound==0) 
-                        formattedAnswer += MMSG1F + "\n";
+                        formattedAnswer += "\n";
                     else 
                         
 			//formattedAnswer = formattedAnswer.substring(6, 100);   
