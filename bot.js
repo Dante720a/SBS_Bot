@@ -108,7 +108,7 @@ bot.onText(/(.+)$/, function (msg, match) {
                     else 
                         currentAnswer += "\n"; 
                         
-                    currentAnswer += item.content.$t; // get item content, '\u27a1' is the arrow emoji
+                    	currentAnswer += item.content.$t; // get item content, '\u27a1' is the arrow emoji
 			
                 }
                 
@@ -214,17 +214,17 @@ bot.onText(/(.+)$/, function (msg, match) {
                 {
                     // add the line break if not the first answer
                     if (itemsFound==0) 
-                        //formattedAnswer += "" + "\n";
-			formattedAnswer = formattedAnswer.substring(6, 256) +  "\n";
+                        formattedAnswer += "" + "\n";
+			
                     else 
                         formattedAnswer +=  "\n";
                         //formattedAnswer = formattedAnswer.substring(6, 256) +  "\n";
 			
 			
                     	itemsFound++;
-                    	formattedAnswer += item.content.$t; // add item content, '\u27a1' is the arrow emoji
+                    	formattedAnswer += '\u27a1' + item.content.$t; // add item content, '\u27a1' is the arrow emoji
 			
-			formattedAnswer = formattedAnswer.substring(6, 60) +  "\n";
+			
 			
 			
                 }
@@ -234,7 +234,7 @@ bot.onText(/(.+)$/, function (msg, match) {
                         currentAnswer == 'Starting from ' + currentHours + " h the following talks are goinf:\n";
                     else 
                         currentAnswer += "\n"; 
-                        currentAnswer += '\u27a1'+ item.content.$t; // get item content, '\u27a1' is the arrow emoji
+                        currentAnswer += '\u27a1' + item.content.$t; // get item content, '\u27a1' is the arrow emoji
 			
 			
                 }
