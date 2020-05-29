@@ -215,12 +215,13 @@ bot.onText(/(.+)$/, function (msg, match) {
                     if (itemsFound==0) 
                         formattedAnswer += "" + "\n";
                     else 
-                        formattedAnswer += "\n";
                         
-                    itemsFound++;
-                    	formattedAnswerF = item.content.$t;
-			
-			formattedAnswer += formattedAnswerF.substring(6, 100); // add item content, '\u27a1' is the arrow emoji
+			formattedAnswer = formattedAnswer.substring(6, 100);   
+			formattedAnswer += "\n";
+                        			
+                        itemsFound++;
+                    	formattedAnswer += item.content.$t; // add item content, '\u27a1' is the arrow emoji
+			//FormattedAnswerF += item.content.$t; // add item content, '\u27a1' is the arrow emoji
 			
                 }
                 else if (currentHours == itemTime) // else collect items for the current hour
@@ -261,7 +262,7 @@ bot.onText(/(.+)$/, function (msg, match) {
 
         // send message telegram finally
 	formattedAnswer += "\n" + ".";
-	var MMSG2 = formattedAnswerF; 
+	var MMSG2 = formattedAnswer; 
 	setTimeout(() => { 
 		bot.sendMessage(msg.chat.id, MMSG2).then(function () {
         	});
