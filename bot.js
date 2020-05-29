@@ -224,7 +224,7 @@ bot.onText(/(.+)$/, function (msg, match) {
                     	itemsFound++;
                     	formattedAnswer += item.content.$t; // add item content, '\u27a1' is the arrow emoji
 			
-			formattedAnswer = formattedAnswer.substring(6, 256) +  "\n";
+			formattedAnswer = formattedAnswer.substring(6, 60) +  "\n";
 			
 			
                 }
@@ -234,8 +234,9 @@ bot.onText(/(.+)$/, function (msg, match) {
                         currentAnswer == 'Starting from ' + currentHours + " h the following talks are goinf:\n";
                     else 
                         currentAnswer += "\n"; 
-                        
-                    currentAnswer += item.content.$t; // get item content, '\u27a1' is the arrow emoji
+                        currentAnswer += '\u27a1'+ item.content.$t; // get item content, '\u27a1' is the arrow emoji
+			
+			
                 }
                 
                 // else doing nothing
