@@ -220,7 +220,7 @@ bot.onText(/(.+)$/, function (msg, match) {
 			formattedAnswer += "\n";
                         			
                         itemsFound++;
-                    	formattedAnswer += "" + item.content.$t.substring(6, 100).replace(",", " |").replace("موجودی:", " ") + "" ; // add item content, '\u27a1' is the arrow emoji
+                    	formattedAnswer += "" + item.content.$t.substring(6, 100).replace(",", "  |  ").replace("موجودی:", " ") + "" ; // add item content, '\u27a1' is the arrow emoji
 			//FormattedAnswerF += item.content.$t; // add item content, '\u27a1' is the arrow emoji
 			
                 }
