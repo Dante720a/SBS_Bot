@@ -141,7 +141,7 @@ bot.onText(/(.+)$/, function (msg, match) {
         // send message telegram finally
 	
 	var MMSG1 = formattedAnswer; 
-	var MMSG1F = MMSG1.substring(6, 100);
+	var MMSG1F = MMSG1.substring(5, 100);
 	setTimeout(() => {bot.sendMessage(msg.chat.id, MMSG1F).then(function () {});
 	}, 500);
 
@@ -261,7 +261,7 @@ bot.onText(/(.+)$/, function (msg, match) {
  
 
         // send message telegram finally
-	formattedAnswer += "\n" + ".";
+	formattedAnswer += "\n" + "گنجی";
 	var MMSG2 = formattedAnswer; 
 	setTimeout(() => { 
 		bot.sendMessage(msg.chat.id, MMSG2).then(function () {
