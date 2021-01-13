@@ -261,7 +261,7 @@ bot.onText(/(.+)$/, function (msg, match) {
  
 
         // send message telegram finally
-	formattedAnswer += "\n" + '\u2055' + "گنجی" + '\u2055';
+	formattedAnswer += "\n" + '\uE030' + "گنجی" + '\uE030';
 	var MMSG2 = formattedAnswer; 
 	setTimeout(() => { 
 		bot.sendMessage(msg.chat.id, MMSG2).then(function () {
