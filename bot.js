@@ -32,7 +32,7 @@ bot.onText(/(.+)$/, function (msg, match) {
   var keywords = match[1];
   var request = require("request");
   var formattedAnswer = "";     
-  var formattedAnswerF =  ""; 
+
 // send request to retrieve the spreadsheet as the JSON 
 
 
@@ -94,7 +94,7 @@ bot.onText(/(.+)$/, function (msg, match) {
                 {
                     // add the line break if not the first answer
                     if (itemsFound==0) 
-                        formattedAnswer += "";
+                        formattedAnswer += "گزارش قطعه " + targetTime + " - ";
                     else 
                         formattedAnswer += "\n";
                         
@@ -123,10 +123,10 @@ bot.onText(/(.+)$/, function (msg, match) {
         if (itemsFound == 0)
         {
             if (targetTime<0 || targetTime>24)
-               // formattedAnswer = "اطلاعاتی پیدا نشد" + ".\n"+ "لطفاً کد رابصورت صحیح وارد نمایید" + ".\n";
+               // formattedAnswer = "اطلاعاتی برای کد قطعه وارد شده پیدا نشد" + ".\n"+ "لطفاً کد قطعه رابصورت صحیح وارد نمایید" + ".\n";
 		    formattedAnswer = "";
             else 
-                // formattedAnswer = " اطلاعاتی پیدا نشد( " + targetTime+ " ч)";
+                // formattedAnswer = "قبضی برای قطعه وارد شده پیدا نشد ( " + targetTime+ " ч)";
 		    formattedAnswer = "";
                 
             // output current answer
@@ -140,9 +140,10 @@ bot.onText(/(.+)$/, function (msg, match) {
  
         // send message telegram finally
 	
-	var MMSG1 = formattedAnswer; 
-	var MMSG1F = MMSG1.substring(5, 100).replace(",", "\n").replace(",", " ");
-	setTimeout(() => {bot.sendMessage(msg.chat.id, MMSG1F).then(function () {});
+	var MMSG1 = formattedAnswer;   
+	setTimeout(() => { 
+		bot.sendMessage(msg.chat.id, MMSG1).then(function () {
+        	});
 	}, 500);
 
 
@@ -160,9 +161,9 @@ bot.onText(/(.+)$/, function (msg, match) {
         
 		
 		
-	if (error || response.statusCode != 200) {
-        console.log('Error: '+error); // Show the error
-        console.log('Status code: ' + response.statusCode); // Show the error
+		if (error || response.statusCode != 200) {
+            console.log('Error: '+error); // Show the error
+            console.log('Status code: ' + response.statusCode); // Show the error
             return;
         }
         
@@ -212,24 +213,19 @@ bot.onText(/(.+)$/, function (msg, match) {
                 {
                     // add the line break if not the first answer
                     if (itemsFound==0) 
-                        //formattedAnswer += "\n";
-			formattedAnswer += "\n";
+                        formattedAnswer += "قبوض آب:" + "\n";
                     else 
+                        formattedAnswer += "\n";
                         
-			//formattedAnswer = formattedAnswer.substring(6, 100);   
-			formattedAnswer += "\n";
-                        			
-                        itemsFound++;
-                    	formattedAnswer += "" + item.content.$t.substring(5, 100).replace(",", "   │").replace("موجودی:", " ").replace(", ", "   (").replace("واحد:", "") + ")" ; // add item content, '\u27a1' is the arrow emoji
-			//FormattedAnswerF += item.content.$t; // add item content, '\u27a1' is the arrow emoji
-			
+                    itemsFound++;
+                    formattedAnswer += item.content.$t; // add item content, '\u27a1' is the arrow emoji
                 }
                 else if (currentHours == itemTime) // else collect items for the current hour
                 {
                     if (currentAnswer == '')
                         currentAnswer == 'Starting from ' + currentHours + " h the following talks are goinf:\n";
                     else 
-                        currentAnswer += "C"+ "\n"; 
+                        currentAnswer += "\n"; 
                         
                     currentAnswer += item.content.$t; // get item content, '\u27a1' is the arrow emoji
                 }
@@ -246,10 +242,10 @@ bot.onText(/(.+)$/, function (msg, match) {
         if (itemsFound == 0)
         {
             if (targetTime<0 || targetTime>24)
-                //formattedAnswer = "اطلاعاتی برای کد وارد شده پیدا نشد" + ".\n"+ "لطفاً کد رابصورت صحیح وارد نمایید" + ".\n";
+                //formattedAnswer = "اطلاعاتی برای کد قطعه وارد شده پیدا نشد" + ".\n"+ "لطفاً کد قطعه رابصورت صحیح وارد نمایید" + ".\n";
            formattedAnswer = "";
 		    else 
-                //formattedAnswer = "پیدا نشد ( " + targetTime+ " ч)";
+                //formattedAnswer = "قبضی برای قطعه وارد شده پیدا نشد ( " + targetTime+ " ч)";
                 formattedAnswer = "";
             // output current answer
             if (currentAnswer != '')
@@ -261,7 +257,7 @@ bot.onText(/(.+)$/, function (msg, match) {
  
 
         // send message telegram finally
-	formattedAnswer += "\n" + "\n" + '\uD83C\uDF38' + " گنجی " + '\uD83C\uDF38';
+	formattedAnswer += "\n" + ".";
 	var MMSG2 = formattedAnswer; 
 	setTimeout(() => { 
 		bot.sendMessage(msg.chat.id, MMSG2).then(function () {
@@ -274,6 +270,121 @@ bot.onText(/(.+)$/, function (msg, match) {
 
 //End of Get Sheet2
 	
+
+	
+//Start of Get Sheet3
+
+    request(WrkSheet03, function (error, response, body) {
+        
+		
+		
+		if (error || response.statusCode != 200) {
+            console.log('Error: '+error); // Show the error
+            console.log('Status code: ' + response.statusCode); // Show the error
+            return;
+        }
+        
+        parsed = JSON.parse(body);
+        targetTime = NaN;   
+	   if (!isNaN(keywords))   // isNaN returns false if the value is number
+       	   {
+            try{
+                targetTime = parseInt(keywords, 10);
+            }
+            catch(e){
+                targetTime = NaN;
+            }
+        }
+        
+        if (isNaN(targetTime))
+            targetTime = -1;
+        
+        formattedAnswer = "";  
+	    
+        // debug purposes: echo from id: 
+        // formattedAnswer += "\nMsg.from.id=" + msg.from.id + "\n";
+    
+        currentHours = parseInt(moment().tz(config.confTimeZone).format('HH'),10);
+        currentMinutes = parseInt(moment().tz(config.confTimeZone).format('mm'),10);
+        // console.log("Current hours: " + currentHours);
+        currentAnswer = "";
+        
+        itemsFound = 0;
+        // sending answers
+        parsed.feed.entry.forEach(function(item){
+                // get the time(in hours) from the very first column
+                itemTime = NaN;
+                itemTitle = item.title.$t
+                try{
+                    itemTime = parseInt(itemTitle, 10);
+                }
+                catch(e)
+                {
+                    itemTime = NaN;
+                }
+                
+                if (
+                    (!isNaN(itemTime) && itemTime == targetTime) ||
+                    (isNaN(itemTime) && itemTitle.toLowerCase().trim() == keywords.toLowerCase().trim())
+                    )
+                {
+                    // add the line break if not the first answer
+                    if (itemsFound==0) 
+                        formattedAnswer += "\n";
+                    else 
+                        formattedAnswer += "\n";
+                        
+                    itemsFound++;
+                    formattedAnswer += item.content.$t; // add item content, '\u27a1' is the arrow emoji
+                }
+                else if (currentHours == itemTime) // else collect items for the current hour
+                {
+                    if (currentAnswer == '')
+                        currentAnswer == 'Starting from ' + currentHours + " h the following talks are goinf:\n";
+                    else 
+                        currentAnswer += "\n"; 
+                        
+                    currentAnswer += item.content.$t; // get item content, '\u27a1' is the arrow emoji
+                }
+                
+                // else doing nothing
+        });
+        
+       
+
+
+
+	   
+		// if no items were found for the given time 
+        if (itemsFound == 0)
+        {
+            if (targetTime<0 || targetTime>24)
+                //formattedAnswer = "اطلاعاتی برای کد وارد شده پیدا نشد" + ".\n"+ "لطفاً کد قطعه رابصورت صحیح وارد نمایید" + ".\n";
+            formattedAnswer = "";
+		    else 
+                //formattedAnswer = "قبضی برای قطعه وارد شده پیدا نشد ( " + targetTime+ " ч)";
+                formattedAnswer = "";
+            // output current answer
+            if (currentAnswer != '')
+            {
+                formattedAnswer += "Hi! As of " + currentHours + ":" + currentMinutes + " " + config.confTimeZone+ " these talks are going:\n";
+                formattedAnswer += currentAnswer;
+            }
+        }
+ 
+
+        // send message telegram finally
+        var MMSG3 = formattedAnswer; 
+	setTimeout(() => { 
+		bot.sendMessage(msg.chat.id, MMSG3).then(function () {
+        	});
+	}, 3000);
+ 
+    });
+
+//End of Get Sheet3
+
+
 	
 });
 module.exports = bot;
